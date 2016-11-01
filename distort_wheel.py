@@ -101,10 +101,13 @@ class distortion_wheel:
         new[diff[0]//2:(shp[0]-diff[0]//2),diff[1]//2:(shp[1]-diff[1]//2)] = small
         return new
 
-    def smart_displacement(self, image):
-        """will not allow image to be shifted beyond its borders"""
+    def smart_displacement(self, image, imname=None):
+        """will not allow image to be shifted beyond its borders
+        imname is used to catch images that throw errors"""
         vsums = np.sum(image, (1,2))
         hsums = np.sum(image, (0,2))
+        if not imname:
+            imname = 'unknown'
         try:
             hvalid = np.where(hsums > 0.0)
             vvalid = np.where(vsums > 0.0)
@@ -120,12 +123,12 @@ class distortion_wheel:
             image = np.roll(image, hshift, axis=1)
             image = np.roll(image, vshift, axis=0)
         except ValueError:
-            print( "image cannot be properly manipulated..."\
-                "writing to erroneous_image.png")
+            print( "%s cannot be properly manipulated..."\
+                   "writing to erroneous_image.png" % imname)
             cv2.imwrite('/home/max/workspace/Sketch2/erroneous_image.png', image)
         return image
 
-    def process_image(self, image, cls=None, smart=False):
+    def process_image(self, image, cls=None, smart=False, imname=None):
         """processes image using distortions and some strokes"""
         stroke_first = np.random.random() < co.stroke_priority        
         #handle tint
@@ -199,7 +202,7 @@ class distortion_wheel:
         if not smart:
             image = self.displace.process_image(image)
         else:
-            image = self.smart_displacement(image)
+            image = self.smart_displacement(image, imname)
         if (not stroke_first) and max_strokes > 0 :
             add_imperfections(image, **stroke_kwargs)
         if np.random.random() < co.flip_chance and cls not in NOFLIP_IMAGE_CLASSES:
