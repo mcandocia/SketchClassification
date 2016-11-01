@@ -601,10 +601,11 @@ class neural_network(object):
         classes = results['class']
         timestamp = datetime.now()
         for i, yval in enumerate(y):
-            self.cur.execute("INSERT INTO errors VALUES(%s, %s, %s, %s, %s)",
-                             (int(yval), int(numbers[i]), timestamp),
+            self.cur.execute("INSERT INTO errors VALUES(%s,%s,%s,%s,%s,%s,%s)",
+                             (int(yval), int(numbers[i]), timestamp,
                              self.cat_labels[int(yval)],
-                             classes[i])
+                             classes[i], self.epoch, 
+                             '_'.join(self.name, str(self.param_index))))
         self.conn.commit()
 
 #batch size may need to be changed depending on purposes of network
