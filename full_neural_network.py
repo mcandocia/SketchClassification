@@ -605,7 +605,7 @@ class neural_network(object):
                              (int(yval), int(numbers[i]), timestamp,
                              self.cat_labels[int(yval)],
                              classes[i], self.epoch, 
-                             '_'.join(self.name, str(self.param_index))))
+                              '_'.join([self.name, str(self.param_index)])))
         self.conn.commit()
 
 #batch size may need to be changed depending on purposes of network
