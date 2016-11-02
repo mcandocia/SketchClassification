@@ -37,9 +37,9 @@ default_params = ['batch_size','kernels','input_dimensions',
                   'convolution_dimensions','pool_sizes','stride_sizes',
                   'layer_pattern','relu_pattern','dropout_rate','rng_seed',
                   'base_learning_rate','learning_decay_per_epoch','l2_norm','name'
-                  ,'param_index','address','n_epochs']
+                  ,'param_index','address','n_epochs','momentum']
 
-default_blacklist = ['momentum']
+default_blacklist =[]# ['momentum']#forgot why I even had this...
 
 secondary_params = ['output_size','n_train_batches',
                     'n_valid_batches','n_test_batches','cat_labels',
@@ -651,7 +651,10 @@ def load_network_isolate(filename,modified_batch_size=None, disable_fetchers=Fal
             continue
         try:
             setattr(network,param,value)
-            print 'set %s=%s' % (param, value)
+            #constants_py is too long, and config isn't actually imported
+            #into network after reloading (may do so in future, though)
+            if param <> 'constants_py':
+                print 'set %s=%s' % (param, value)
             #exec("network.%s = %s" % (param, value))
         except:
             print param
