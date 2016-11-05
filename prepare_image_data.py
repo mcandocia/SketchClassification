@@ -107,10 +107,6 @@ class fetcher:
                         #cannot do this with RGBA
 			#src_img = cv2.cvtColor(src_img, cv2.COLOR_RGB2LAB)
 			xlist.append(src_img)
-                        if np.random.random() < 0.0004:
-                                timestring = datetime.datetime.now().\
-                                             strftime('%b-%d_%H-%M-%S')
-                                cv2.imwrite('/home/max/workspace/Sketch2/trained_samples/%s.png' % timestring, src_img)
 			ylist.append(obj_class)
 		return (np.float32(np.asarray(xlist)/255.),
                         np.int32(np.asarray(ylist)))	
