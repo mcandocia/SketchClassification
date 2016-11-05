@@ -13,13 +13,16 @@ Python 2.7 dependencies:
 How to configure software:
 
 0. Set up a Postgresql Database, changing the info in dbinfo.py to match this. 
-0.5. Set up theano. You will probably want to use a guide for this. Make sure       that you have GPU enabled under ~/.theanorc or whatever your config file 
-     should be. floatX should be set to float32 for the GPU
+
+0.5. Set up theano. You will probably want to use a guide for this. Make sure         that you have GPU enabled under ~/.theanorc or whatever your config file 
+   should be. floatX should be set to float32 for the GPU.
 1. Have your RGBA PNG files in a directory. Currently class is detected by the 
    filename being in the structure of [classname]__[other text].png. The double
    underscore is necessary.
-2. Configure export_filenames_to_postgres.py to match the image types you want. * NOFLIP_IMAGES contains classes that do not have horizontal symmetry
- * BASIC_IMAGES contains classes that are so simple that fewer strokes will be 	  added as imperfections as to avoid too much confusion during training.
+2. Configure export_filenames_to_postgres.py to match the image types you want. 
+ * NOFLIP_IMAGES contains classes that do not have horizontal symmetry
+ * BASIC_IMAGES contains classes that are so simple that fewer strokes will be 	 
+   added as imperfections as to avoid too much confusion during training.
  * Change the beginning of main() if you plan on using a non-Postgres database
    to store image metadata
  * Change the string in files_list to the directory containing your images.
