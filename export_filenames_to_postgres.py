@@ -50,7 +50,7 @@ def main():
     cur.execute("CREATE TABLE images(class INTEGER, filename text,role integer, random_index integer);")
 
     regex = '__.*|'.join(valid_names)+'__.*'
-    files_list = os.listdir('/home/max/Pictures/blog_project_images/images/')
+    files_list = os.listdir('INSERT VALID DIRECTORY HERE')
     files_list = [x for x in files_list if re.match('.*png$',x)]
     files_list = [x for x in files_list if re.match(regex,x)]
     data_rows = []
@@ -79,9 +79,6 @@ def rand_cat():
 maxindex = pow(2,22)
 def rand_index():
     return [round(random.random() * maxindex)]
-
-def make_path(name,category):
-    return '/home/max/workspace/StateFarmDistract/train/%s/%s' % (category,name)
 
 def store_data(data,cursor):
     ldata = [[row[0],row[1]] for row in data]
