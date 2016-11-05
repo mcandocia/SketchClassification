@@ -14,7 +14,8 @@ How to configure software:
 
 0. Set up a Postgresql Database, changing the info in dbinfo.py to match this. 
 
-0.5. Set up theano. You will probably want to use a guide for this. Make sure         that you have GPU enabled under ~/.theanorc or whatever your config file 
+0.5. Set up theano. You will probably want to use a guide for this. Make sure
+   that you have GPU enabled under ~/.theanorc or whatever your config file 
    should be. floatX should be set to float32 for the GPU.
 1. Have your RGBA PNG files in a directory. Currently class is detected by the 
    filename being in the structure of [classname]__[other text].png. The double
